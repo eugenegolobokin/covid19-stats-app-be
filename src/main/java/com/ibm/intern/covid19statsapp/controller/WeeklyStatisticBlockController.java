@@ -6,6 +6,7 @@ import com.ibm.intern.covid19statsapp.service.WeeklyStatisticBlockService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,5 +26,10 @@ public class WeeklyStatisticBlockController {
     @GetMapping("/countries")
     public ResponseEntity<List<CountriesResponse>> getAllCountries() {
         return ResponseEntity.ok(weeklyStatisticBlockService.getAllCountries());
+    }
+
+    @GetMapping("/countries/{country}")
+    public ResponseEntity<List<WeeklyStatisticBlock>> getAllStatsForCountry(@PathVariable("country") String country) {
+        return ResponseEntity.ok(weeklyStatisticBlockService.getAllStatsForCountry(country));
     }
 }

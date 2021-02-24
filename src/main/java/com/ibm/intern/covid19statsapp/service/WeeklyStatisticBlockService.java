@@ -21,13 +21,17 @@ public class WeeklyStatisticBlockService {
     }
 
     public List<WeeklyStatisticBlock> getAllStatistics() {
-        log.info("Retrieving all statistics");
+        log.info("Retrieving all statistics data");
         return weeklyStatisticBlockRepo.findAll();
     }
 
     public List<CountriesResponse> getAllCountries() {
-        log.info("Retrieving all countries from list");
+        log.info("Retrieving all countries from the list");
         return weeklyStatisticBlockRepo.findDistinctBy();
     }
 
+    public List<WeeklyStatisticBlock> getAllStatsForCountry(String country) {
+        log.info("Retrieving statistical data for {}", country);
+        return weeklyStatisticBlockRepo.findByCountry(country);
+    }
 }

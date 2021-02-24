@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface WeeklyStatisticBlockRepo extends JpaRepository<WeeklyStatisticBlock, Long> {
     List<CountriesResponse> findDistinctBy();
+
+    List<WeeklyStatisticBlock> findByCountry(String country);
 }
