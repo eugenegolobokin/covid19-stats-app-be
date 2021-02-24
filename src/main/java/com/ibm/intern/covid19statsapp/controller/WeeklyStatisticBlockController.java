@@ -28,8 +28,19 @@ public class WeeklyStatisticBlockController {
         return ResponseEntity.ok(weeklyStatisticBlockService.getAllCountries());
     }
 
-    @GetMapping("/countries/{country}")
+    @GetMapping("/stats/{country}")
     public ResponseEntity<List<WeeklyStatisticBlock>> getAllStatsForCountry(@PathVariable("country") String country) {
         return ResponseEntity.ok(weeklyStatisticBlockService.getAllStatsForCountry(country));
     }
+
+    @GetMapping("/stats/deaths/{country}")
+    public ResponseEntity<List<WeeklyStatisticBlock>> getAllStatsDeathsForCountry(@PathVariable("country") String country) {
+        return ResponseEntity.ok(weeklyStatisticBlockService.getStatsDeathsForCountry(country));
+    }
+
+    @GetMapping("/stats/cases/{country}")
+    public ResponseEntity<List<WeeklyStatisticBlock>> getAllStatsCasesForCountry(@PathVariable("country") String country) {
+        return ResponseEntity.ok(weeklyStatisticBlockService.getStatsCasesForCountry(country));
+    }
+
 }

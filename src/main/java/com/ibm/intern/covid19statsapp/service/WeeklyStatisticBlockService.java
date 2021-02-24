@@ -1,5 +1,6 @@
 package com.ibm.intern.covid19statsapp.service;
 
+import com.ibm.intern.covid19statsapp.data.entity.EIndicator;
 import com.ibm.intern.covid19statsapp.data.entity.WeeklyStatisticBlock;
 import com.ibm.intern.covid19statsapp.data.repo.WeeklyStatisticBlockRepo;
 import com.ibm.intern.covid19statsapp.payload.response.CountriesResponse;
@@ -34,4 +35,15 @@ public class WeeklyStatisticBlockService {
         log.info("Retrieving statistical data for {}", country);
         return weeklyStatisticBlockRepo.findByCountry(country);
     }
+
+    public List<WeeklyStatisticBlock> getStatsDeathsForCountry(String country) {
+        log.info("Retrieving statistical data of deaths for {}", country);
+        return weeklyStatisticBlockRepo.findByCountryAndIndicator(country, EIndicator.DEATHS);
+    }
+
+    public List<WeeklyStatisticBlock> getStatsCasesForCountry(String country) {
+        log.info("Retrieving statistical data of cases for {}", country);
+        return weeklyStatisticBlockRepo.findByCountryAndIndicator(country, EIndicator.CASES);
+    }
+
 }
