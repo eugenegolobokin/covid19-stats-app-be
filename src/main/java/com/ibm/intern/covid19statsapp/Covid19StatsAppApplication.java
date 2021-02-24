@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -20,7 +22,7 @@ import java.util.List;
 public class Covid19StatsAppApplication {
 
     @Value("${app.data-source-endpoint}")
-    private String COVID_STATS_URL;
+    private String COVID_STATS_SOURCE_URL;
 
     public static void main(String[] args) {
         SpringApplication.run(Covid19StatsAppApplication.class, args);
@@ -30,18 +32,23 @@ public class Covid19StatsAppApplication {
     CommandLineRunner runner(WeeklyStatisticBlockService weeklyStatisticBlockService) {
         return args -> {
             RestTemplate restTemplate = new RestTemplate();
-            ResponseEntity<List<WeeklyStatisticBlock>> responseEntity =
-                    restTemplate.exchange(
-                            COVID_STATS_URL,
-                            HttpMethod.GET,
-                            null,
-                            new ParameterizedTypeReference<>() {
-                            }
-                    );
-            List<WeeklyStatisticBlock> stats = responseEntity.getBody();
-            weeklyStatisticBlockService.saveStatisticsList(stats);
-            log.info("Statistics loaded from source and saved to DB");
-
+            try {
+                ResponseEntity<List<WeeklyStatisticBlock>> responseEntity =
+                        restTemplate.exchange(
+                                COVID_STATS_SOURCE_URL,
+                                HttpMethod.GET,
+                                null,
+                                new ParameterizedTypeReference<>() {
+                                }
+                        );
+                List<WeeklyStatisticBlock> stats = responseEntity.getBody();
+                weeklyStatisticBlockService.saveStatisticsList(stats);
+                log.info("Statistics loaded from source and saved to DB");
+            } catch (HttpStatusCodeException e) {
+                log.info("HTTP Error: " + e.getMessage());
+            } catch (ResourceAccessException e) {
+                log.info("Resource Error: " + e.getMessage());
+            }
         };
     }
 
