@@ -1,6 +1,7 @@
 package com.ibm.intern.covid19statsapp.controller;
 
 import com.ibm.intern.covid19statsapp.data.entity.WeeklyStatisticBlock;
+import com.ibm.intern.covid19statsapp.payload.response.CountriesResponse;
 import com.ibm.intern.covid19statsapp.service.WeeklyStatisticBlockService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,5 +20,10 @@ public class WeeklyStatisticBlockController {
     @GetMapping("/stats")
     public ResponseEntity<List<WeeklyStatisticBlock>> getAllStatistics() {
         return ResponseEntity.ok(weeklyStatisticBlockService.getAllStatistics());
+    }
+
+    @GetMapping("/countries")
+    public ResponseEntity<List<CountriesResponse>> getAllCountries() {
+        return ResponseEntity.ok(weeklyStatisticBlockService.getAllCountries());
     }
 }
