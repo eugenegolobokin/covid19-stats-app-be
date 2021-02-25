@@ -18,11 +18,6 @@ import java.util.List;
 public class WeeklyStatisticBlockController {
     private final WeeklyStatisticBlockService weeklyStatisticBlockService;
 
-    @GetMapping("/stats")
-    public ResponseEntity<List<WeeklyStatisticBlock>> getAllStatistics() {
-        return ResponseEntity.ok(weeklyStatisticBlockService.getAllStatistics());
-    }
-
     @GetMapping("/countries")
     public ResponseEntity<List<CountriesResponse>> getAllCountries() {
         return ResponseEntity.ok(weeklyStatisticBlockService.getAllCountries());

@@ -21,11 +21,6 @@ public class WeeklyStatisticBlockService {
         weeklyStatisticBlockRepo.saveAll(statistics);
     }
 
-    public List<WeeklyStatisticBlock> getAllStatistics() {
-        log.info("Retrieving all statistics data");
-        return weeklyStatisticBlockRepo.findAll();
-    }
-
     public List<CountriesResponse> getAllCountries() {
         log.info("Retrieving all countries from the list");
         return weeklyStatisticBlockRepo.findDistinctBy();

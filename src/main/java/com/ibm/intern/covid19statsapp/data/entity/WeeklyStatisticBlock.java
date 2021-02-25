@@ -32,4 +32,7 @@ public class WeeklyStatisticBlock {
     @JsonProperty("cumulative_count")
     private Long cumulativeCount;
 
+    public void setCountry(String country) {
+        this.country = country.replaceAll("/", " ");
+    }
 }
