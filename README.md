@@ -13,12 +13,18 @@
 2. Front end from [this repository](https://github.com/eugenegolobokin/covid19-stats-app-fe).
 
 #### 2. Starting application
+```
+# Clone this repository
+$ git clone https://github.com/eugenegolobokin/covid19-stats-app-be.git
 
-* Clone this repository
-`$ git clone https://github.com/eugenegolobokin/covid19-stats-app-be.git`
+# Go into the repository folder
+$ cd covid19-stats-app-be
 
-* Go to source folder and run command `./gradlew bootRun` in console
-* As alternative - open project in your IDE and run main method in Covid19StatsAppApplication.java
+# Run the app
+$ ./gradlew bootRun
+```
+
+* As alternative - open project in your IDE and run main method from Covid19StatsAppApplication.java
 * Project uses in-memory H2 database - data from external source will be downloaded and saved into database on app loading. 
 * Open [http://localhost:8080](http://localhost:8080) in your browser - welcome message should indicate your backend is up and running.
 * Clone [this frontend repository](https://github.com/eugenegolobokin/covid19-stats-app-fe) and setup according to instructions for full experience.
